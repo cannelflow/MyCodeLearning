@@ -1,0 +1,61 @@
+//html file
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Reactjs Tutorial</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container-fluid">
+    <div class="container"></div>
+</div>
+<script src="RadioOption.js" type="text/jsx"></script>
+<script src="RadioOtherOption.js" type="text/jsx"></script>
+<script src="demo.js" type="text/jsx"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+</body>
+</html>
+//RadioOption.js file
+var RadioOption = React.createClass({
+    render:function(){
+        return(
+            <p>
+                <label>
+                    <input type="radio" name="" value={this.props.value} />{this.props.children}
+                </label>
+            </p>
+        );
+    }
+});
+//RadioOtherOption.js file
+var RadioOtherOption = React.createClass({
+   render:function(){
+       return(
+           <p><label><input type="radio" name="" value="other" />Other Please Specify <input type="text" /></label></p>
+       );
+   }
+});
+//demo.js file
+var Abc = React.createClass({
+    render:function(){
+    return(
+    <div>
+    <h1>Form Using Reactjs</h1>
+    <h2>How Did You Hear About Us</h2>
+    <form>
+        <RadioOption value="newspaper"> News Paper</RadioOption>
+        <RadioOption value="radio"> Radio</RadioOption>
+        <RadioOption value="tv"> Television</RadioOption>
+        <RadioOption value="search"> Search Engine</RadioOption>
+        <RadioOption value="social"> Socila Media</RadioOption>
+        <RadioOtherOption></RadioOtherOption>
+    <p><label><input  type="submit"/></label></p>
+    </form>
+    </div>
+    );
+}
+});
+    React.render(<Abc />,document.querySelector(".container"));
