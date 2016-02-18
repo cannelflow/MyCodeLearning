@@ -1,0 +1,44 @@
+//html file
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>The New Bostan Tutorial</title>
+
+</head>
+<body>
+<div class="content"></div>
+<script src="demo.js" type="text/jsx"></script>.
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+</body>
+</html>
+//demo.js file
+//create component
+var Abc = React.createClass({
+    //always takes render function which returns html content
+     render:function(){
+         return(
+             <div>
+             <h3>{this.props.user}</h3>
+                 <p>{this.props.children}</p>
+             </div>
+         );
+     }
+});
+var a = document.querySelector(".content");
+//takes two input component and display
+React.render(
+    //put them inside div tag to use multiple times
+    <div>
+        //anything in between atart and end tag is called child
+        <Abc user="A">Likes Singing</Abc>
+        <Abc user="B">Likes Playing</Abc>
+        <Abc user="C">Likes Cooking</Abc>
+    </div>,
+    a);
+
+
+
