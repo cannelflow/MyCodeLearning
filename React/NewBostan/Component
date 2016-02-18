@@ -1,0 +1,29 @@
+//html file
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>The New Bostan Tutorial</title>
+
+</head>
+<body>
+<div class="content"></div>
+<script src="demo.js" type="text/jsx"></script>.
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+</body>
+</html>
+//demo.js file
+var Abc = React.createClass({
+     render:function(){
+         return(
+             <h2>This Is React Component</h2>
+         );
+     }
+});
+var a = document.querySelector(".content");
+React.render(<Abc/>,a);
+
+
