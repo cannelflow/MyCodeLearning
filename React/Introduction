@@ -1,0 +1,29 @@
+//html file
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>LearnCode Tutorial</title>
+
+</head>
+<body>
+<div id="app"></div>
+<script src="demo.js" type="text/jsx"></script>.
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+</body>
+</html>
+//js file
+//create component
+var Layout = React.createClass({
+    //render method
+    render:function(){
+        return(
+            <h2>Hello React</h2>
+        );
+    }
+});
+var app = document.querySelector("#app")
+React.render(<Layout />,app);
