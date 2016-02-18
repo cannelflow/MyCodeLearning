@@ -25,15 +25,27 @@ var Abc = React.createClass({
          );
      }
 });
+//create component
+var Abc = React.createClass({
+    //always takes render function which returns html content
+     render:function(){
+         return(
+             <h2>My Name Is {this.props.name} And I Like {this.props.like}</h2>
+         );
+     }
+});
 var a = document.querySelector(".content");
 //takes two input component and display
 React.render(
     //put them inside div tag to use multiple times
     <div>
-        <Abc name ="A"/>
-        <Abc name="B"/>
-        <Abc name="C"/>
+        <Abc name ="A" like="Playing"/>
+        <Abc name="B" like="Singing"/>
+        <Abc name="C" like="Dancing"/>
     </div>,
     a);
+
+
+
 
 
