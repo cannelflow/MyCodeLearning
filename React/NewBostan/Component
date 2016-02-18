@@ -17,6 +17,7 @@
 </html>
 //demo.js file
 var Abc = React.createClass({
+    //always takes render function which returns html content
      render:function(){
          return(
              <h2>This Is React Component</h2>
@@ -24,6 +25,10 @@ var Abc = React.createClass({
      }
 });
 var a = document.querySelector(".content");
+//takes two input component and display
 React.render(<Abc/>,a);
+
+
+
 
 
