@@ -1,0 +1,57 @@
+// html code
+<!DOCTYPE html>
+<html>
+<head>
+    <title>D3 Tutorial</title>
+	<meta charset="utf-8" />
+    <link href="../Content/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="../Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="../Scripts/d3/d3.min.js"></script>
+</head>
+<body>
+    <div class="container-fluid text-danger">
+    </div>
+    <script src="../Scripts/jquery-2.2.1.min.js"></script>
+    <script src="../Scripts/bootstrap.min.js"></script>
+    <script src="demo.js"></script>
+</body>
+</html>
+// js code
+var dataArray = [20, 40, 50, 60];
+/*
+good practicseis to set height & width here
+*/
+var height = 500;
+var width = 500;
+/*the we need to create scale use scale method and then linear scale
+.domain([0, 60]) [minvalue,maxvalue] is called domain 
+ .range([0, width]); resulting range [0,width]
+*/
+var widthScale = d3.scale.linear()
+                   .domain([0, 60])
+                   .range([0, width]);
+/*below is color scale*/
+var color = d3.scale.linear()
+              .domain([0, 60])
+              .range(["red","blue"]);
+/*first create holder for svg element*/
+var holder = d3.select("body")
+                .append("svg")
+                .attr("width", width)
+                .attr("height", height);
+/*cretae bars
+here
+var bars = holder.selectAll("rect") will return empty array/selection
+.data(dataArray) and we can connect it to data by data method
+.enter() this method returns placeholder for each data element for which there is no dom element
+*/
+var bars = holder.selectAll("rect")
+                 .data(dataArray)
+                 .enter()
+                 .append("rect")
+                 .attr("width", function (d) { return widthScale(d) })
+                 .attr("height", 50)
+                 .attr("fill", function (d) { return color(d)})
+                 .attr("y", function (d, i) { return i * 100 });
+ 
+              
