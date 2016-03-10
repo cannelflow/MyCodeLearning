@@ -1,0 +1,34 @@
+//html file
+<!DOCTYPE html>
+<html>
+<head>
+    <title>D3 Tutorial Demo</title>
+	<meta charset="utf-8" />
+    <link href="../Content/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="../Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="../Scripts/d3/d3.min.js"></script>
+</head>
+<body>
+    <div class="container-fluid text-danger">
+    </div>
+    <script src="../Scripts/jquery-2.2.1.min.js"></script>
+    <script src="../Scripts/bootstrap.min.js"></script>
+    <script src="demo.js"></script>
+</body>
+</html>
+//js file
+var dataset = [5, 10, 15, 20, 25];
+/*
+we want to make a aparagraph for all value of dataset
+d3.select("body") finds the body in the DOM and pass it to next methos in chain
+selectAll("p") selects all paragraph in the DOM since it dosen't exists yut and return emptu selection that soon going to exists
+data(dataset) count and parse all data value there are 5 value in dadaset so everything will be execiyed five times
+.enter() to create new data element we use this method like here for creating placeholder element 
+.append("p") takes the placeholder created by enter() and append p element to it
+text("hello") insert text value to paragraph
+*/
+d3.select("body").selectAll("p")
+  .data(dataset) 
+  .enter()
+  .append("p")
+  .text("new paragraph");
