@@ -86,21 +86,13 @@
 				.call(xAxis);
 //css file
 .axis path,
-.axis line {
-fill: none;
-stroke: black;
-shape-rendering: crispEdges;
-}
-.axis text {
-font-family: sans-serif;
-font-size: 11px;
-}
-p {
-color: olive;
-}
-text {
-color: olive;
-}
-text {
-fill: olive;
-}
+			.axis line {
+				fill: none;
+				stroke: black;
+				shape-rendering: crispEdges;
+			}
+			
+			.axis text {
+				font-family: sans-serif;
+				font-size: 11px;
+			}
