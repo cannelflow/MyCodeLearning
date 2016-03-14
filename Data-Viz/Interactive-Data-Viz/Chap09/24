@@ -63,17 +63,20 @@ svg.append("clipPath") //Make a new clipPath
 .attr("width", w - padding * 3)
 .attr("height", h - padding * 2);
 //Create circles
-svg.selectAll("circle")
-   .data(dataset)
-   .enter()
-   .append("circle")
-   .attr("cx", function (d) {
-       return xScale(d[0]);
-   })
-   .attr("cy", function (d) {
-       return yScale(d[1]);
-   })
-   .attr("r", 2);
+svg.append("g")
+			   .attr("id", "circles")
+			   .attr("clip-path", "url(#chart-area)")
+			   .selectAll("circle")
+			   .data(dataset)
+			   .enter()
+			   .append("circle")
+			   .attr("cx", function(d) {
+			   		return xScale(d[0]);
+			   })
+			   .attr("cy", function(d) {
+			   		return yScale(d[1]);
+			   })
+			   .attr("r", 2);
 
 //Create X axis
 svg.append("g")
