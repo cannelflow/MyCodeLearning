@@ -30,17 +30,20 @@ var circle = holder.append("circle")
                  .attr("fill",red);
 */
 /*noe create a recatngle
-var rect = holder.append("rect")
-                 .attr("width", 100)
-                 .attr("height", 50);
+var rect = canvas.append("rect")
+                  .attr("height", 50)
+                  .attr("width", 100)
+                  .attr("x", 100)
+                  .attr("y", 100)
+                  .attr("fill", "blue");
 */
-var line = holder.append("line")
+var line = canvas.append("line")
                  .attr("x1", 0)
-                 .attr("y2", 100)
-                 .attr("x2", 100)
+                 .attr("y1", 0)
+                 .attr("x2", 400)
                  .attr("y2", 400)
-                 .attr("stroke","green")
-                  .attr("stroke-width", 10);
+                 .attr("stroke", "green")
+                 .attr("stroke-width",10)
 
  
               
