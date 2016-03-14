@@ -19,7 +19,7 @@
 // js code
 var dataArray = [20,40,60];
 /*first create holder for svg element*/
-var holder = d3.select("body")
+var canvas = d3.select("body")
                 .append("svg")
                 .attr("width", 500)
                 .attr("height", 500);
@@ -29,12 +29,16 @@ var bars = holder.selectAll("rect") will return empty array/selection
 .data(dataArray) and we can connect it to data by data method
 .enter() this method returns placeholder for each data element for which there is no dom element
 */
-var bars = holder.selectAll("rect")
-                 .data(dataArray)
-                 .enter()
-                 .append("rect")
-                 .attr("width", function (d) { return d*10; })
-                 .attr("height", 50)
-                 .attr("y", function (d, i) { return i*100})
- 
-              
+var bar = canvas.selectAll("rect")
+                .data(dataSet)
+                .enter()
+                .append("rect")
+                .attr("width", function (d) {
+                    return (d*10);
+                })
+                .attr("height", 20)
+                .attr("y", function (d, i) {
+                    //this will give y spacing
+                    return(i*50);
+                });
+
