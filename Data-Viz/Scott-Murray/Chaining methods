@@ -1,0 +1,37 @@
+//html file
+<!DOCTYPE html>
+<html>
+<head>
+    <title>D3 Tutorial Demo</title>
+	<meta charset="utf-8" />
+    <link href="../Content/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="../Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="../Scripts/d3/d3.min.js"></script>
+    <link href="demo.css" rel="stylesheet" />
+</head>
+<body>
+    <script src="../Scripts/jquery-2.2.1.min.js"></script>
+    <script src="../Scripts/bootstrap.min.js"></script>
+    <script src="demo.js"></script>
+</body>
+</html>
+//js file
+//creating a paragraph using d3
+d3.select("body").
+    append("p").
+    text("New Paragraph !!!");
+/*
+1.d3 — References the D3 object, so we can access its methods.
+.select("body") — Give select() a CSS selector as input, and it will return a reference 
+to the first element in the DOM that matches. (Use selectAll() when you need more than one element.) In this case, we just want the body, so a 
+reference to body is handed off to the next method in our chain.
+2..append("p") — append() creates whatever new DOM element you specify and appends it to the end 
+(but just inside) of whatever selection it’s acting on. In our case, we want to create a new p 
+within the body. We specified "p" as the input argument, but this method also sees the reference to
+body that was passed down the chain from the select() method. Finally, append(), in turn, hands down 
+a reference to the new element it just created.
+3..text("New paragraph!") — text() takes a string and inserts it between the opening and 
+closing tags of the current selection. Since the previous method passed down a reference to our new p, 
+this code just inserts the new text between <p> and </p>. (In cases where there is existing content, it will be overwritten.)
+4.; — The all-important semicolon indicates the end of this line of code.
+*/
