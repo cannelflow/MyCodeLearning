@@ -1,0 +1,50 @@
+// html file
+<!DOCTYPE html>
+<html>
+<head>
+    <title>D3 Tutorial Demo</title>
+	<meta charset="utf-8" />
+    <link href="../Content/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="../Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="../Scripts/d3/d3.min.js"></script>
+    <link href="demo.css" rel="stylesheet" />
+</head>
+<body>
+    <submit />
+    <script src="../Scripts/jquery-2.2.1.min.js"></script>
+    <script src="../Scripts/bootstrap.min.js"></script>
+    <script src="demo.js"></script>
+</body>
+</html>
+// js file
+var dataset = [5, 10, 15, 20, 25];
+var h = 50;
+var w = 500;
+// create the SVG element in which to place all our shapes
+/*
+That will find the body and append a new svg element just before the closing </body> tag.
+*/
+var svg = d3.select("body").
+    append("svg").
+    attr("width", w).
+    attr("height", h);
+//data bind
+var circles = svg.selectAll("circle").
+    data(dataset);
+//enter
+circles.
+    enter().
+    append("circle");
+//update
+circles.
+    attr("cx", function (d, i) {
+        return (i * 50 + d);
+    }).
+    attr("cy", h / 2).attr("r", function (d) {
+        return (d);
+    });
+//exit
+circles.
+    exit().
+    remove();
+    
