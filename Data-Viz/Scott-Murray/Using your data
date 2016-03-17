@@ -16,3 +16,30 @@
 </body>
 </html>
 //js file
+var dataset = [5, 10, 15, 20, 25];
+var body = d3.select("body");
+//bind data
+var para = body.
+    selectAll("p").
+    data(dataset);
+//enter
+para.
+    enter().
+    append("p");
+//update
+para.
+    text(function (d) {
+        return (d);
+    }).
+    style("color", function (d) {
+        if (d > 15) {
+            return ("red");
+        } else {
+            return ("blue");
+        }
+    });
+//exit
+para.
+    exit().
+    remove();
+    
