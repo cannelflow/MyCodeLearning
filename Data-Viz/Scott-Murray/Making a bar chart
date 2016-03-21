@@ -17,53 +17,47 @@
 </html>
 //js file
 var dataset = [5, 10, 13, 19, 21, 25, 22, 18, 15, 13,
-                11, 12, 15, 20, 18, 17, 16, 18, 23, 25];
+                11, 12, 15, 20, 18, 17, 16, 18, 23, 25,23,20];
 var w = 500;
 var h = 100;
 var barPadding = 1;
 //create svg element
 var svg = d3.select("body").
     append("svg").
-    attr("width", w).
-    attr("height", h);
-//bind data to create bar chart
+    attr("height", h).
+    attr("width", w);
+//bind data
 var rects = svg.selectAll("rect").
     data(dataset);
 //enter data
-rects.
-    enter().
+rects.enter().
     append("rect");
-//update
+//update data
 rects.attr("x", function (d, i) {
-    return (i * (w/dataset.length));
+    return i * (w / dataset.length);
 }).
     attr("y", function (d) {
-        return (h - d*4);
+        return (h - d * 4);
     }).
-    attr("width", w/dataset.length-barPadding).
-    attr("height",function(d){
-           return(d*4);
+    attr("height", function (d) {
+        return (d * 4);
     }).
-    attr("fill", function (d) {
-        return "rgb(0, 0, " + (d * 10) + ")";
-    });
-//exit
-rects.
-    exit().
+    attr("width", w / dataset.length - barPadding).
+    attr("fill", "teal");
+//exit data
+rects.exit().
     remove();
-//adding Labels
+//label
 //bind data
-var labels = svg.selectAll("text").
+var label = svg.selectAll("text").
     data(dataset);
 //enter data
-labels.
-    enter().
+label.enter().
     append("text");
-//update 
-labels.
-    text(function (d) {
-        return (d);
-    }).
+//update
+label.text(function (d) {
+    return (d);
+}).
     attr("x", function (d, i) {
         return i * (w / dataset.length) + (w / dataset.length - barPadding) / 2;
     }).
@@ -74,15 +68,3 @@ labels.
     attr("font-size", "11px").
     attr("fill", "white").
     attr("text-anchor", "middle");
-//exit
-labels.
-    exit().
-    remove();
-// css file
-div.bar {
-    display: inline-block;
-    width: 20px;
-    height: 75px;   /* We'll override this later */
-    background-color: teal;
-    margin-right:2px;
-}
