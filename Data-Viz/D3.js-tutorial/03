@@ -17,33 +17,27 @@
 </body>
 </html>
 //js file
-/*first create holder for svg element*/
-var holder = d3.select("body")
-                .append("svg")
-                .attr("width", 500)
-                .attr("height", 500);
-/*now create circle
-var circle = holder.append("circle")
-                 .attr("cx", 250)
-                 .attr("cy", 250)
-                 .attr("r", 50)
-                 .attr("fill",red);
-*/
-/*noe create a recatngle
-var rect = canvas.append("rect")
-                  .attr("height", 50)
-                  .attr("width", 100)
-                  .attr("x", 100)
-                  .attr("y", 100)
-                  .attr("fill", "blue");
-*/
-var line = canvas.append("line")
-                 .attr("x1", 0)
-                 .attr("y1", 0)
-                 .attr("x2", 400)
-                 .attr("y2", 400)
-                 .attr("stroke", "green")
-                 .attr("stroke-width",10)
-
- 
-              
+var svg = d3.select("body").
+    append("svg").
+    attr("width", 500).
+    attr("height", 500);
+//create circle
+var circle = svg.append("circle").
+    attr("cx", 250).
+    attr("cy", 250).
+    attr("r", 50).
+    attr("fill", "red");
+//create ractangle
+var rect = svg.append("rect").
+    attr("x", 100).
+    attr("y", 100).
+    attr("width", 100).
+    attr("height", 50);
+//create line 
+var line = svg.append("line").
+    attr("x1", 50).
+    attr("y1", 50).
+    attr("x2", 150).
+    attr("y2", 150).
+    attr("stroke", "green").
+    attr("stroke-width", 10);
