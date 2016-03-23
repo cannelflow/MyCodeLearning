@@ -1,0 +1,49 @@
+//html file
+<!DOCTYPE html>
+<html>
+<head>
+    <title>D3 Tutorial Demo</title>
+    <meta charset="utf-8" />
+    <link href="../Content/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="../Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="../Scripts/d3/d3.min.js"></script>
+    <link href="demo.css" rel="stylesheet" />
+</head>
+<body>
+    <h1>SVG Shapes</h1>
+    <!--
+    <svg width="400" height="400" style="background-color:#f4f4f4">
+        <rect width="300"height="300"style="fill:rgb(255,0,0);stroke:rgb(0,0,0);stroke-width:1"x="10"y="10"></rect>    
+    </svg>
+    <svg width="400" height="400" style="background-color:#f4f4f4">
+        <circle cx="50" cy="50" r="40" stroke="black" stroke-width="1" fill="yellow"></circle>
+    </svg>    
+    -->
+
+    <script src="../Scripts/jquery-2.2.1.min.js"></script>
+    <script src="../Scripts/bootstrap.min.js"></script>
+    <script src="demo.js"></script>
+</body>
+</html>
+//js file
+//create svg element
+var svg = d3.select("body").
+    append("svg").
+    attr("width", 400).
+    attr("height", 400).
+    style("background", "#f4f4f4");
+//create rectangle
+var rect = svg.append("rect").
+    attr("width", 300).
+    attr("height", 300).
+    attr("x", 50).
+    attr("y", 50).
+    style("fill", "red").
+    style("stroke", "black").
+    style("stroke-width", 1);
+//create circle
+var circle = svg.append("circle").
+    attr("cx", 200).
+    attr("cy", 200).
+    attr("r", 50).
+    style("fill", "blue");
