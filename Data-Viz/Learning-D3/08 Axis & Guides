@@ -19,12 +19,15 @@
 </html>
 //js file
 var dataset = []; //Initialize empty array
-for (var i = 0; i < 15; i++) { //Loop 25 times
-    var newNumber = Math.round(Math.random() * 500); //New random number (0-55)
+for (var i = 0; i < 500; i++) { //Loop 25 times
+    var newNumber = Math.round(Math.random() * 1000); //New random number (0-55)
     dataset.push(newNumber); //Add new number to array
 }
-var h = 500;
-var w = 500;
+var margin = {
+    top:30,right:30,bottom:40,left:50
+}
+var h = 500-margin.top-margin.bottom;
+var w = 800-margin.right-margin.left;
 //var barWidth = 35;
 //var barOffSet = 5;
 var animateDuration = 700;
@@ -50,8 +53,10 @@ var colorScale = d3.scale.linear().
 //create svg element
 var myChart = d3.select("#chart").
     append("svg").
-    attr("height", h).
-    attr("width", w).
+    attr("height", h+margin.top+margin.bottom).
+    attr("width", w + margin.right + margin.left).
+    append('g').
+    attr('transform', 'translate(' + margin.left + ',' + margin.top + ')').
     style("background", "#f4f4f4");
 //bind data
 var rects = myChart.
@@ -103,41 +108,41 @@ rects.transition().
         return (i * animateDelay)
     }).
     ease("elastic");
-//create axis
+//create hScale & vScale
 var vScale = d3.scale.linear().
     domain([0, d3.max(dataset)]).
     range([h, 0]);
 var hScale = d3.scale.ordinal().
     domain(d3.range(0, dataset.length)).
     rangeBands([0, w]);
-//v axis
+//create Vaxis
 var vAxis = d3.svg.axis().
     scale(vScale).
     orient("left").
-    ticks(5).
+    ticks(10).
     tickPadding(5);
-//create v guide
+//create vGuide
 var vGuide = d3.select("svg").
     append("g");
 vAxis(vGuide);
-vGuide.attr("transform", "translate(35,10)");
-vGuide.selectAll("path").
-    style("fill", "none").
-    style("stroke", "#000");
-vGuide.selectAll("line").style("stroke", "#000");
+vGuide.attr('transform', 'translate('+margin.left+','+margin.top+')');
+vGuide.selectAll('path').
+    style('fill', 'none').
+    style('stroke', '#000');
+vGuide.selectAll('line').style('stroke', '#000');
 //create haxis
 var hAxis = d3.svg.axis().
     scale(hScale).
     orient("bottom").
     tickValues(hScale.domain().filter(function (d, i) {
-        return !(i % dataset.length / 2);
+        return !(i % (dataset.length / 5));
     }))
-//create h guide
+//create hGuide
 var hGuide = d3.select("svg").
     append("g");
 hAxis(hGuide);
-hGuide.attr("transform", 'translate(35,'+(h-30)+')');
-hGuide.selectAll("path").
-    style("fill", "none").
-    style("stroke", "#000");
-hGuide.selectAll("line").style("stroke", "#000");
+hGuide.attr('transform', 'translate('+margin.left+','+(h+margin.top)+')');
+hGuide.selectAll('path').
+    style('fill', 'none').
+    style('stroke', '#000');
+hGuide.selectAll('line').style('stroke', '#000');
