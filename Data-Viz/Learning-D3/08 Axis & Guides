@@ -1,0 +1,143 @@
+//html file
+<!DOCTYPE html>
+<html>
+<head>
+    <title>D3 Tutorial Demo</title>
+    <meta charset="utf-8" />
+    <link href="../Content/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="../Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="../Scripts/d3/d3.min.js"></script>
+    <link href="demo.css" rel="stylesheet" />
+</head>
+<body>
+    <h1>SVG Shapes</h1>
+    <div id="chart"></div>
+    <script src="../Scripts/jquery-2.2.1.min.js"></script>
+    <script src="../Scripts/bootstrap.min.js"></script>
+    <script src="demo.js"></script>
+</body>
+</html>
+//js file
+var dataset = []; //Initialize empty array
+for (var i = 0; i < 15; i++) { //Loop 25 times
+    var newNumber = Math.round(Math.random() * 500); //New random number (0-55)
+    dataset.push(newNumber); //Add new number to array
+}
+var h = 500;
+var w = 500;
+//var barWidth = 35;
+//var barOffSet = 5;
+var animateDuration = 700;
+var animateDelay = 30;
+//create tooltip
+var toolTip = d3.select("body").append("div").
+    style("position", "absolute").
+    style("background", "#f4f4f4").
+    style("padding", "5 15px").
+    style("border", "1px #333 solid").
+    style("border-radius", "5px").
+    style("opacity", "0");
+//create scale
+var yScale = d3.scale.linear().
+    domain([0, d3.max(dataset)]).
+    range([0, h]);
+var xScale = d3.scale.ordinal().
+    domain(d3.range(0, dataset.length)).
+    rangeBands([0, w]);
+var colorScale = d3.scale.linear().
+    domain([0, dataset.length]).
+    range(["#90ee90", "#30c230"]);
+//create svg element
+var myChart = d3.select("#chart").
+    append("svg").
+    attr("height", h).
+    attr("width", w).
+    style("background", "#f4f4f4");
+//bind data
+var rects = myChart.
+    selectAll("rect").
+    data(dataset);
+//enter data
+rects.
+    enter().
+    append("rect");
+//update data
+rects.
+    style("fill", function (d, i) {
+        return (colorScale(i));
+    }).
+    attr("width", xScale.rangeBand()).
+    attr("height", 0).
+    attr("x", function (d, i) {
+        return xScale(i);
+    }).
+    attr("y", h);
+//exit data
+rects.
+    exit().
+    remove();
+//create events
+rects.on("mouseover", function (d) {
+    toolTip.transition().
+        style("opacity", 1)
+
+    toolTip.html(d).
+        style("left", (d3.event.pageX + "px")).
+        style("top", (d3.event.pageY + "px"))
+    d3.select(this).style("opacity", 0.5)
+});
+rects.on("mouseout", function (d) {
+    toolTip.transition().style("opacity", 0)
+    d3.select(this).style("opacity", 1)
+});
+//transition
+rects.transition().
+    attr("height", function (d) {
+        return yScale(d);
+    }).
+    attr("y", function (d) {
+        return (h - yScale(d));
+    }).
+    duration(animateDuration).
+    delay(function (d, i) {
+        return (i * animateDelay)
+    }).
+    ease("elastic");
+//create axis
+var vScale = d3.scale.linear().
+    domain([0, d3.max(dataset)]).
+    range([h, 0]);
+var hScale = d3.scale.ordinal().
+    domain(d3.range(0, dataset.length)).
+    rangeBands([0, w]);
+//v axis
+var vAxis = d3.svg.axis().
+    scale(vScale).
+    orient("left").
+    ticks(5).
+    tickPadding(5);
+//create v guide
+var vGuide = d3.select("svg").
+    append("g");
+vAxis(vGuide);
+vGuide.attr("transform", "translate(35,10)");
+vGuide.selectAll("path").
+    style("fill", "none").
+    style("stroke", "#000");
+vGuide.selectAll("line").style("stroke", "#000");
+//create haxis
+var hAxis = d3.svg.axis().
+    scale(hScale).
+    orient("bottom").
+    tickValues(hScale.domain().filter(function (d, i) {
+        return !(i % dataset.length / 2);
+    }))
+//create h guide
+var hGuide = d3.select("svg").
+    append("g");
+hAxis(hGuide);
+hGuide.attr("transform", 'translate(35,'+(h-30)+')');
+hGuide.selectAll("path").
+    style("fill", "none").
+    style("stroke", "#000");
+hGuide.selectAll("line").style("stroke", "#000");
