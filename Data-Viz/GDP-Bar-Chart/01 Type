@@ -19,7 +19,7 @@
     <script src="demo.js"></script>
 </body>
 </html>
-//
+//js file
 //Create Margin 
 var margin = { top: 20, right: 10, bottom: 100, left: 50 },
     width = 710 - margin.right - margin.left,
@@ -27,29 +27,29 @@ var margin = { top: 20, right: 10, bottom: 100, left: 50 },
 /*
 create svg element then append height and width and g
 */
-var svg = d3.select("body")
-    .append("svg")
-      .attr({
+var svg = d3.select("body").
+    append("svg").
+      attr({
           "width": width + margin.right + margin.left,
           "height": height + margin.top + margin.bottom
-      })
-    .append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.right + ")");
+      }).
+    append("g").
+      attr("transform", "translate(" + margin.left + "," + margin.right + ")");
 /*
 create scale then followed by axis
 */
 // define x and y scales
-var xScale = d3.scale.ordinal()
-    .rangeRoundBands([0, width], 0.2, 0.2);
-var yScale = d3.scale.linear()
-    .range([height, 0]);
+var xScale = d3.scale.ordinal().
+    rangeRoundBands([0, width], 0.2, 0.2);
+var yScale = d3.scale.linear().
+    range([height, 0]);
 // define x axis and y axis
-var xAxis = d3.svg.axis()
-    .scale(xScale)
-    .orient("bottom");
-var yAxis = d3.svg.axis()
-    .scale(yScale)
-    .orient("left");
+var xAxis = d3.svg.axis().
+    scale(xScale).
+    orient("bottom");
+var yAxis = d3.svg.axis().
+    scale(yScale).
+    orient("left");
 /*
 fethch data from csv file 
 */
@@ -68,38 +68,34 @@ d3.csv("data.csv", function (error, data) {
     // Specify the domains of the x and y scales
     xScale.domain(data.map(function (d) { return d.country; }));
     yScale.domain([0, d3.max(data, function (d) { return d.gdp; })]);
-
- var rect = svg.selectAll('rect')
-      .data(data)
-      .enter()
-      .append('rect')
-      .attr({
+//create bar or bind data
+ var rect = svg.selectAll('rect').
+      data(data).
+      enter().
+      append('rect').
+      attr({
           "height": 0,
           "y":height
-      })
-      .transition().duration(3000)
-      .delay(function (d, i) { return i * 200; })
+      }).
+      transition().duration(3000).
+      delay(function (d, i) { return i * 200; }).
       // attributes can be also combined under one .attr
-      .attr({
+      attr({
           "x": function (d) { return xScale(d.country); },
           "y": function (d) { return yScale(d.gdp); },
           "width": xScale.rangeBand(),
           "height": function (d) { return height - yScale(d.gdp); }
-      })
-      .style("fill", function (d, i) { return 'rgb(20, 20, ' + ((i * 30) + 100) + ')' });
-
-
-    svg.selectAll('text')
-        .data(data)
-        .enter()
-        .append('text')
-
-
-
-        .text(function (d) {
+      }).
+     style("fill", function (d, i) { return 'rgb(20, 20, ' + ((i * 30) + 100) + ')' });
+//create label
+    svg.selectAll('text').
+        data(data).
+        enter().
+        append('text').
+        text(function (d) {
             return d.gdp;
-        })
-        .attr({
+        }).
+        attr({
             "x": function (d) { return xScale(d.country) + xScale.rangeBand() / 2; },
             "y": function (d) { return yScale(d.gdp) + 12; },
             "font-family": 'sans-serif',
@@ -123,15 +119,15 @@ d3.csv("data.csv", function (error, data) {
 
 
     // Draw yAxis and postion the label
-    svg.append("g")
-        .attr("class", "y axis")
-        .call(yAxis)
-        .append("text")
-        .attr("transform", "rotate(-90)")
-        .attr("x", -height / 2)
-        .attr("dy", "-3em")
-        .style("text-anchor", "middle")
-        .text("Trillions of US Dollars ($)");
+    svg.append("g").
+        attr("class", "y axis").
+        call(yAxis).
+        append("text").
+        attr("transform", "rotate(-90)").
+        attr("x", -height / 2).
+        attr("dy", "-3em").
+        style("text-anchor", "middle").
+        text("Trillions of US Dollars ($)");
 });
 //css file
 svg {
