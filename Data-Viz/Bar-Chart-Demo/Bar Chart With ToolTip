@@ -1,0 +1,192 @@
+//html file
+<!DOCTYPE html>
+<html>
+<head>
+    <title>D3 Tutorial Demo</title>
+    <meta charset="utf-8" />
+    <link href="../Content/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="../Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="../Scripts/d3/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.6.7/d3-tip.min.js"></script>
+    <link href="demo.css" rel="stylesheet" />
+</head>
+<body>
+    
+    <div class="container-fluid text-center">
+        <h1>Bar Graph - 2015 GDP Based On PPP Valuation</h1>
+    </div>
+    <script src="../Scripts/jquery-2.2.1.min.js"></script>
+    <script src="../Scripts/bootstrap.min.js"></script>
+    <script src="demo.js"></script>
+</body>
+</html>
+//js file
+//create Margin
+var margin = { top: 40, right: 20, bottom: 30, left: 40 },
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+//format axis
+var formatPercent = d3.format(".0%");
+/*
+define scale then followed by axis
+*/
+// define x and y scales
+var xScale = d3.scale.ordinal().
+    rangeRoundBands([0, width], 0.2, 0.2);
+var yScale = d3.scale.linear().
+    range([height, 0]);
+// define x axis and y axis
+var xAxis = d3.svg.axis().
+    scale(xScale).
+    orient("bottom");
+var yAxis = d3.svg.axis().
+    scale(yScale).
+    orient("left").
+    tickFormat(formatPercent);
+/*
+Create Tooltip
+*/
+var toolTip = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function (d) {
+      return "<strong>Frequency:</strong> <span style='color:red'>" + d.frequency + "</span>";
+  });
+/*
+create svg element then append height and width and g which act as a container
+*/
+var svg = d3.select("body").
+    append("svg").
+      attr({
+          "width": width + margin.right + margin.left,
+          "height": height + margin.top + margin.bottom
+      }).
+    append("g").
+      attr("transform", "translate(" + margin.left + "," + margin.right + ")");
+//call toolTip
+svg.call(toolTip);
+/*
+Fetch Data From tsv File
+*/
+d3.tsv("demo.tsv", function (error, data) {
+    if (error) console.log("Error: data not loaded!");
+    data.forEach(function (d) {
+        d.letter = d.letter;
+        d.frequency = d.frequency;
+      //     console.log(d.frequency);   
+    });  
+    // Specify the domains of the x and y scales
+    xScale.domain(data.map(function (d) { return d.letter; }));
+    yScale.domain([0, d3.max(data, function (d) { return d.frequency; })]);
+    // Draw xAxis
+    svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+    //Draw yAxis
+    svg.append("g")
+     .attr("class", "y axis")
+     .call(yAxis)
+   .append("text")
+     .attr("transform", "rotate(-90)")
+     .attr("y", 6)
+     .attr("dy", ".71em")
+     .style("text-anchor", "end")
+     .text("Frequency");
+    /*
+    create bar or bind data
+    */
+    //bind data
+    svg.selectAll(".bar")
+      .data(data)
+   //enter data
+    .enter().
+        append("rect")
+   //update data
+      .attr("class", "bar")
+      .attr("x", function (d) { return xScale(d.letter); })
+      .attr("width", xScale.rangeBand())
+      .attr("y", function (d) { return yScale(d.frequency); })
+      .attr("height", function (d) { return height - yScale(d.frequency); })
+      .on('mouseover', toolTip.show)
+      .on('mouseout', toolTip.hide)
+});
+//css file
+svg {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  background-color:antiquewhite;
+}
+body {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+.bar {
+  fill: orange;
+}
+
+.bar:hover {
+  fill: orangered ;
+}
+.d3-tip {
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+}
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+}
+
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+}
+//tsv file
+letter	frequency
+A	.08167
+B	.01492
+C	.02780
+D	.04253
+E	.12702
+F	.02288
+G	.02022
+H	.06094
+I	.06973
+J	.00153
+K	.00747
+L	.04025
+M	.02517
+N	.06749
+O	.07507
+P	.01929
+Q	.00098
+R	.05987
+S	.06333
+T	.09056
+U	.02758
+V	.01037
+W	.02465
+X	.00150
+Y	.01971
+Z	.00074
