@@ -1,0 +1,174 @@
+//html file
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ScatterPlot</title>
+    <meta charset="utf-8" />
+    <link href="../Content/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="../Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="../Scripts/d3/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.6.7/d3-tip.min.js"></script>
+    <link href="demo.css" rel="stylesheet" />
+</head>
+<body>
+   
+    <script src="../Scripts/jquery-2.2.1.min.js"></script>
+    <script src="../Scripts/bootstrap.min.js"></script>
+    <script src="demo.js"></script>
+</body>
+</html>
+//js file
+//Call csv File 
+d3.csv("data.csv", function (error, data) {
+    //Check For Error
+    if (error) console.log("Error");
+    /*
+    Check For Data
+    data.forEach(function (d) {
+        console.log("X Is "+ d.x);
+        console.log("Y Is "+ d.y);
+    });
+    */
+    //Create Margin
+    var margin = { top: 40, right: 20, bottom: 60, left: 60 },
+        width = 960 - margin.left - margin.right,
+        height = 600 - margin.top - margin.bottom;
+    /*
+   define scale then followed by axis
+   */
+    // define x and y scales
+    // define x and y scales
+    xMax = d3.max(data, function (d) {
+        return +d.x;
+    });
+    yMax = d3.max(data, function (d) {
+        return +d.y;
+    });
+    var xScale = d3.scale.linear().
+        domain([0, xMax]).
+        range([0, width]);
+    var yScale = d3.scale.linear().
+        domain([0, yMax]).
+        range([height, 0]);
+    // define x axis and y axis
+    var xAxis = d3.svg.axis().
+        scale(xScale).
+        orient("bottom");
+    var yAxis = d3.svg.axis().
+        scale(yScale).
+        orient("left");
+    /*
+    Create Tooltip
+    */
+    var toolTip = d3.tip()
+      .attr('class', 'd3-tip')
+      .offset([-10, 0])
+      .html(function (d) {
+          
+          return ('X = '+ d.x +" Y = "+d.y);
+      });
+    /*
+   create svg element then append height and width and g which act as a container
+   */
+    var svg = d3.select("body").
+      append("svg").
+      attr({
+          "width": width + margin.right + margin.left,
+          "height": height + margin.top + margin.bottom
+      }).
+    append("g").
+      attr("transform", "translate(" + margin.left + "," + margin.right + ")");
+
+    //call toolTip
+    svg.call(toolTip);
+    // Draw xAxis
+    svg.append("g")
+     .attr("class", "x axis")
+     .attr("transform", "translate(0," + height + ")")
+     .call(xAxis);
+    //Draw yAxis
+    svg.append("g")
+     .attr("class", "y axis")
+     .call(yAxis);
+    /*
+ create bar or bind data
+ */
+    //bind data
+    svg.selectAll("circle")
+      .data(data)
+   //enter data
+    .enter().
+        append("circle")
+   //update data
+      .attr("class", "circle")
+      .attr("cx", function (d) { return xScale(d.x); })
+      .attr("cy", function (d) { return yScale(d.y); })
+      .attr("r", 8)
+      .on('mouseover', toolTip.show)
+      .on('mouseout', toolTip.hide);
+});
+//css file
+svg {
+  margin-top:10px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  background-color:antiquewhite;
+}
+body {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+.bar {
+  fill: orange;
+}
+
+.bar:hover {
+  fill: orangered ;
+}
+.d3-tip {
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+}
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+}
+
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+}
+//csv file
+x,y
+5,20 
+480,90
+250,50 
+100,33 
+330,95
+410,12
+475,44
+25,67
+85,21
+220,88
+10,10
