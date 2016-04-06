@@ -1,0 +1,118 @@
+//html file
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Forced Layout</title>
+    <meta charset="utf-8" />
+    <link href="../Content/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="../Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="../Scripts/d3/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.6.7/d3-tip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.20/topojson.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/queue-async/1.0.7/queue.min.js"></script>
+    <link href="demo.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="mainContainer text-center">
+        <div id="chart"></div>
+    </div>
+        <script src="../Scripts/jquery-2.2.1.min.js"></script>
+        <script src="../Scripts/bootstrap.min.js"></script>
+        <script src="demo.js"></script>
+</body>
+</html>
+//js file
+// Load Data And Display The World
+d3.json('https://raw.githubusercontent.com/mbostock/topojson/master/examples/world-50m.json', function (error, json) {
+    if (error) console.log("You Got An Error !!!");
+    //Create Margin
+    var margin = { top: 10, right: 10, bottom: 10, left: 10 },
+       width = 1000 - margin.left - margin.right,
+       height = 600 - margin.top - margin.bottom;
+    //Create Projection
+    var projection = d3.geo.mercator()
+        .center([0, 5])
+        .scale(150)
+        .rotate([-180, 0]);
+    //Create Path
+    var path = d3.geo.path()
+        .projection(projection);
+    /*
+      Create SVG Element Then Append Height And Width And g Which Act As A Container
+    */
+    var svg = d3.select("#chart").
+         append("svg").
+         attr({
+             "width": width + margin.right + margin.left,
+             "height": height + margin.top + margin.bottom
+         });
+    //Append g
+    var g = svg.append("g");
+
+    g.selectAll('path')
+      .data(topojson.feature(json, json.objects.countries).features)
+      .enter()
+      .append('path')
+      .attr('fill', '#95E1D3')
+      .attr('stroke', '#266D98')
+      .attr('d', path)
+    // zoom and pan
+    var zoom = d3.behavior.zoom()
+        .on("zoom", function () {
+            g.attr("transform", "translate(" +
+                d3.event.translate.join(",") + ")scale(" + d3.event.scale + ")");
+            g.selectAll("path")
+                .attr("d", path.projection(projection));
+        });
+
+    svg.call(zoom)
+});
+//css file
+body {
+  font: 15px sans-serif;
+  background-color: #ddd;
+  background-repeat: repeat;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAACgCAMAAACsXRuGAAAADFBMVEWIiIjd3d3y8vLm5uZzdc63AAAAbklEQVR42u3ZIQ4AIAwDwI39/8/wAlTFxFUgm5ALmFZV51Iv52Vyx/7CzhdONr3/ylCgQIECBQoUKFCgQIECBQoUKFCgQIECBcrmccGe4qX4vqBAgQIFChQoUKBAgQIFChQoUKBAgQIFij3lX3gBXBBzc8FaGvIAAAAASUVORK5CYII=)
+}
+.mainContainer {
+  background-color: lightblue;
+  margin: 40px auto;
+  padding: 0px;
+  width: 1010px;
+  height: 600px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.32), 0 3px 12px 0 rgba(0, 0, 0, 0.24);
+}
+.d3-tip {
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+}
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+}
+
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+}
+/*Do Not Change*/
+path {
+  stroke: white;
+  stroke-width: 0.25px;
+  fill: grey;
+}
+
