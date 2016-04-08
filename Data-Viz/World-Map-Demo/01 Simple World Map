@@ -9,13 +9,17 @@
     <script src="../Scripts/d3/d3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.6.7/d3-tip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.20/topojson.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/queue-async/1.0.7/queue.min.js"></script>
+    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
     <link href="demo.css" rel="stylesheet" />
 </head>
 <body>
+    <!--
+   <div id="map" style="height: 440px; border: 1px solid #AAA;"></div>
+   -->
     <div class="mainContainer text-center">
         <div id="chart"></div>
-    </div>
+        </div>
         <script src="../Scripts/jquery-2.2.1.min.js"></script>
         <script src="../Scripts/bootstrap.min.js"></script>
         <script src="demo.js"></script>
@@ -31,9 +35,8 @@ d3.json('https://raw.githubusercontent.com/mbostock/topojson/master/examples/wor
        height = 600 - margin.top - margin.bottom;
     //Create Projection
     var projection = d3.geo.mercator()
-        .center([0, 5])
-        .scale(150)
-        .rotate([-180, 0]);
+         .center([0, 2])
+         .scale(150);
     //Create Path
     var path = d3.geo.path()
         .projection(projection);
@@ -66,9 +69,9 @@ d3.json('https://raw.githubusercontent.com/mbostock/topojson/master/examples/wor
         });
 
     svg.call(zoom)
-});
-//css file
-body {
+    });
+    //css file
+    body {
   font: 15px sans-serif;
   background-color: #ddd;
   background-repeat: repeat;
@@ -115,4 +118,3 @@ path {
   stroke-width: 0.25px;
   fill: grey;
 }
-
