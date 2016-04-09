@@ -9,27 +9,25 @@
     <script src="../Scripts/d3/d3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.6.7/d3-tip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.20/topojson.min.js"></script>
-    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
     <link href="demo.css" rel="stylesheet" />
 </head>
 <body>
     <!--
-   <div id="map" style="height: 440px; border: 1px solid #AAA;"></div>
-   -->
+    <div id="map" style="height: 440px; border: 1px solid #AAA;"></div>
+    -->
     <div class="mainContainer text-center">
         <div id="chart"></div>
-        </div>
-        <script src="../Scripts/jquery-2.2.1.min.js"></script>
-        <script src="../Scripts/bootstrap.min.js"></script>
-        <script src="demo.js"></script>
+    </div>
+    <script src="../Scripts/jquery-2.2.1.min.js"></script>
+    <script src="../Scripts/bootstrap.min.js"></script>
+    <script src="demo.js"></script>
 </body>
 </html>
 //js file
 var mapData = "https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/master/meteorite-strike-data.json";
 var mapUrl = "https://raw.githubusercontent.com/mbostock/topojson/master/examples/world-50m.json";
 // Load Json Data
-d3.json(mapData, function (error, json) {
+d3.json(mapUrl, function (error, json) {
     if (error) console.log("You Got An Error On Loading Json Data!!!");
     //Create Margin
     var margin = { top: 10, right: 10, bottom: 10, left: 10 },
@@ -67,14 +65,32 @@ d3.json(mapData, function (error, json) {
     svg.call(toolTip);
     //Append g
     var g = svg.append("g");
+    //Bind Data
+    g.selectAll('path')
+      .data(topojson.feature(json, json.objects.countries).features)
+      .enter()
+      .append('path')
+      .attr('d', path);
+    // zoom and pan
+    var zoom = d3.behavior.zoom()
+        .on("zoom", function () {
+            g.attr("transform", "translate(" +
+                d3.event.translate.join(",") + ")scale(" + d3.event.scale + ")");
+            g.selectAll("path")
+                .attr("d", path.projection(projection));
+        });
+
+    svg.call(zoom);
     //Load World Map
-    d3.json("https://gist.githubusercontent.com/d3noob/5193723/raw/world-110m2.json", function (error, data) {
+    d3.json(mapData, function (error, data) {
         if (error) console.log("You Got An Error On Loading Map Data!!!");
+        // console.log(data);
         var radiusScale = d3.scale.linear()
-					.domain(d3.extent(json.features, function (d) {
+					.domain(d3.extent(data.features, function (d) {
 					    return +d.properties.mass;
 					}))
 					.range([2, 100]);
+        // console.log(radiusScale);
         //Create Circle According To Radius
         g.selectAll("circle")
 				   .data(data.features)
@@ -87,35 +103,17 @@ d3.json(mapData, function (error, json) {
 					       return projection([d.properties.reclong, d.properties.reclat])[1];
 					   })
 					   .attr("r", function (d) {
-					       return massScale(+d.properties.mass);
+					       return radiusScale(+d.properties.mass);
 					   })
 					   .style("fill", function (d, i) {
 					       return color(i);
 					   })
             .on('mouseover', toolTip.show)
             .on('mouseout', toolTip.hide);
-        //Bind Data
-        g.selectAll('path')
-          .data(topojson.feature(json, json.objects.countries).features)
-          .enter()
-          .append('path')
-          .attr('fill', '#95E1D3')
-          .attr('stroke', '#266D98')
-          .attr('d', path)
-        // zoom and pan
-        var zoom = d3.behavior.zoom()
-            .on("zoom", function () {
-                g.attr("transform", "translate(" +
-                    d3.event.translate.join(",") + ")scale(" + d3.event.scale + ")");
-                g.selectAll("path")
-                    .attr("d", path.projection(projection));
-            });
-
-        svg.call(zoom)
     });
     });
     //css file
-    body {
+       body {
   font: 15px sans-serif;
   background-color: #ddd;
   background-repeat: repeat;
