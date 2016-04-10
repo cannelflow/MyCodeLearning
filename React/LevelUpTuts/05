@@ -1,0 +1,83 @@
+//html file
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>LearnCode Tutorial</title>
+
+</head>
+<body>
+//div to render component
+<div id="area"></div>
+
+<script src="demo.js" type="text/babel"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js"></script>
+
+</body>
+</html>
+//js file
+//create component
+var Layout = React.createClass({
+    //define props and type in component
+    propTypes:{
+        name : React.PropTypes.string,
+        isPerson : React.PropTypes.bool
+    },
+    //define default props
+    getDefaultProps:function(){
+        return {
+            name : "React"
+        }
+    },
+    // define initial state
+    getInitialState:function(){
+      return {
+            value:1
+        }
+    },
+    //component mount
+    componentDidMount:function(){
+        this.setState({
+            value:2
+            //this.setState.value = 19
+        });
+    },
+    render:function(){
+        var greeting = "World"
+        if(this.props.isPerson){
+           greeting = (<Person name={this.props.name}/>);
+        }
+        return(
+            <div>
+                <h1>Hello {greeting} </h1>
+                {this.state.value}
+            </div>
+        );
+    }
+});
+//creating another component
+var Person = React.createClass({
+    //define props and type in component
+    propTypes:{
+        name : React.PropTypes.string.isRequired
+
+    },
+    getDefaultProps:function(){
+        return {
+            name : "React"
+        }
+    },
+    render:function(){
+        return(
+            <span>{this.props.name}</span>
+        );
+    }
+});
+//render the component to Dom which takes two parameter element and area where we have to render
+ReactDOM.render(<Layout name="Angular" isPerson={true}/>,
+document.querySelector("#area")
+);
