@@ -1,0 +1,151 @@
+//html file
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8" />
+    <title>React Tutorial</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<div id="app"></div>
+<script src="demo.js" type="text/babel"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js"></script>
+</body>
+</html>
+//js file
+var todos = [
+    { task:"Sleep", isCompleted:true},
+    { task:"Wake Up", isCompleted:false}
+];
+var MainBox  = React.createClass({
+    render:function(){
+        return(
+            <App/>
+        );
+    }
+});
+var App  = React.createClass({
+    getInitialState:function(){
+        return{
+            todos:[]
+        }
+    },
+    componentDidMount:function(){
+        this.setState({
+            todos:todos
+        });
+    },
+    createTask:function(task){
+        this.state.todos.push({
+            task:task,
+            isCompleted:false
+        });
+        this.setState({
+            todos:this.state.todos
+        });
+    },
+    render:function(){
+        return(
+            <div>
+            <h1>React Dodos  App !!!</h1>
+                <TodosList
+                    todos={this.state.todos}
+
+                    />
+                <CreateToDos createTask={this.createTask} />
+            </div>
+        );
+    }
+});
+var TodosList  = React.createClass({
+    render:function(){
+        var resultItem = this.props.todos.map(function(result,index){
+            return(<TodosListItem key={index} value={result}/>) ;
+        });
+        return(
+            <div>
+                <table className="table table-striped table-bordered table-condensed text-center">
+                    <thead>
+                    <tr>
+                        <th>Task</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {resultItem}
+                    </tbody>
+                </table>
+            </div>
+        );
+    }
+});
+var TodosListItem = React.createClass({
+    getInitialState: function() {
+        return {isEditing:false};
+    },
+    onEditClick:function(){
+        this.setState({
+            isEditing:true
+        });
+    },
+    onCancelClick:function(){
+        this.setState({
+            isEditing:false
+        });
+    },
+    renderActionSection:function(){
+        if(this.state.isEditing){
+            return(
+                <td><button>Save</button>
+                    <button onClick={this.onCancelClick}>Cancel</button>
+                </td>
+            );
+        }return(
+            <td><button onClick={this.onEditClick}>Edit</button>
+                <button>Delete</button>
+            </td>
+        );
+    },
+    render:function(){
+        var values = this.props.value;
+
+        return(
+            <tr >
+                <td>{values.task}</td>
+                {this.renderActionSection()}
+            </tr>
+        );
+    }
+});
+var CreateToDos = React.createClass({
+    getInitialState: function() {
+        return {value:"Hello"};
+    },
+    handleSubmit:function(e){
+        e.preventDefault();
+        this.props.createTask(this.refs.inputVal.value);
+        this.setState({text:""});
+    },
+    handleChange:function(e){
+        var text = e.target.value;
+        this.setState({text:text});
+    }
+    ,
+    render:function(){
+        return(
+            <form onSubmit={this.handleSubmit}>
+                <input type="text" ref="inputVal"  onChange={this.handleChange} value={this.state.text}/>
+                <button>Create</button>
+            </form>
+        );
+    },
+
+});
+ReactDOM.render(
+    <MainBox />,
+    document.querySelector("#app")
+);
