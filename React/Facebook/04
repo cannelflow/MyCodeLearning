@@ -1,0 +1,75 @@
+//html file
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>React For EveryOne Tutorial</title>
+
+</head>
+<div id="app"></div>
+<script src="demo.js" type="text/babel"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js"></script>
+</body>
+</html>
+//js file
+var data = [
+    {id: 1, author: "Pete Hunt", text: "This is one comment"},
+    {id: 2, author: "Jordan Walke", text: "This is *another* comment"}
+];
+var App = React.createClass({
+    render: function(){
+        return (
+            <div className="commentBox">
+                <h1>I'm Comment Box !!!</h1>
+                <CommentList data={this.props.data}/>
+                <CommentForm />
+            </div>
+        );
+    }
+});
+var CommentList = React.createClass({
+    render: function() {
+        var commentNodes = this.props.data.map(function(comment) {
+            return (
+                <Comment author={comment.author} key={comment.id}>
+                    {comment.text}
+                </Comment>
+            );
+        });
+        return (
+            <div className="commentList">
+                {commentNodes}
+            </div>
+        );
+    }
+});
+var CommentForm = React.createClass({
+    render: function() {
+        return (
+            <div className="commentForm">
+                <p>Test Test I'm a CommentForm.</p>
+            </div>
+        );
+    }
+});
+var Comment = React.createClass({
+    rawMarkUp:function()  {
+        var rawMarkUp = marked(this.props.children.toString(), {sanitize:true});
+        return {__html: rawMarkUp};
+    },
+    render: function(){
+        return(
+            <div className="comment">
+                <h2 className="commentAuthor">
+                    {this.props.author}
+                </h2>
+                <span dangerouslySetInnerHTML={this.rawMarkUp()}/>
+            </div>
+        );
+    }
+});
+React.render(<App data={data}/>,  document.getElementById("app"));
