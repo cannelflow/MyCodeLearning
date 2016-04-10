@@ -1,0 +1,50 @@
+//html file
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>React For EveryOne Tutorial</title>
+
+</head>
+<div id="app"></div>
+<script src="demo.js" type="text/babel"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js"></script>
+</body>
+</html>
+// js file
+var ButtonForm = React.createClass({
+    render: function(){
+        return (
+            <div>
+                <input type="submit" onClick={this.props.onUserClick} />
+                <h3>You have pressed the button {this.props.counter} times!</h3>
+            </div>
+        );
+    }
+});
+var App = React.createClass({
+    getInitialState: function(){
+        return {
+            counter: 0
+        }
+    },
+    onUserClick: function(){
+        var newCount = this.state.counter += 1;
+        this.setState({
+            counter: newCount
+        });
+    },
+    render: function(){
+        return (
+            <div>
+                <h1> Welcome to the counter app!</h1>
+                <ButtonForm counter={this.state.counter} onUserClick={this.onUserClick} />
+            </div>
+        );
+    }
+});
+React.render(<App />,  document.getElementById("app"));
