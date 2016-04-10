@@ -1,0 +1,49 @@
+//html file
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>React For EveryOne Tutorial</title>
+
+</head>
+<div id="app"></div>
+<script src="demo.js" type="text/babel"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js"></script>
+</body>
+</html>
+//js file
+var DATA = {
+    name:"Adams",
+    phone:"111 222 333"
+}
+//Main/Base Component
+var App = React.createClass({
+    render:function(){
+        return(
+            <div>
+            <h1>Contacts List</h1>
+            <ContactList
+                name = {this.props.contacts.name}
+                phone = {this.props.contacts.phone}
+                />
+            </div>
+        );
+    }
+});
+var ContactList = React.createClass({
+    render:function(){
+        return(
+            <div>
+                <ul>
+                    <li>{this.props.name}:{this.props.phone}</li>
+                </ul>
+            </div>
+        );
+    }
+});
+ReactDOM.render(<App contacts={DATA}/>,
+document.querySelector("#app"));
