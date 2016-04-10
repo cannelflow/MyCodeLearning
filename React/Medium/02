@@ -1,0 +1,72 @@
+//html file
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>React For EveryOne Tutorial</title>
+
+</head>
+<body>
+<div id="app"></div>
+
+<script src="demo.js" type="text/babel"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js"></script>
+
+</body>
+</html>
+// js file
+var DATA = {
+    name: 'John Smith',
+    imgURL: 'http://lorempixel.com/200/200/',
+    hobbyList: ['coding', 'writing', 'skiing']
+}
+//main component
+var App = React.createClass({
+    render:function(){
+        return(
+            <div className="appName">
+                <Profile
+                     name={this.props.profileData.name}
+                     imgURL={this.props.profileData.imgURL}/>
+                <Hobby hobbyList={this.props.profileData.hobbyList}/>
+            </div>
+
+        );
+    }
+});
+//profile component
+var Profile = React.createClass({
+    render:function(){
+        return(
+            <div className="profile">
+                <h3>{this.props.name}</h3>
+                <img src = {this.props.imgURL}/>
+            </div>
+        );
+    }
+});
+//hobby component
+var Hobby = React.createClass({
+    render:function(){
+        //loop through hobbies array
+        var hobbies = this.props.hobbyList.map(function(hobby,index){
+            return(<li key={index}>{hobby}</li>);
+        });
+        return(
+            <div>
+                <h5>My Hobbies</h5>
+                <ul>
+                    {hobbies}
+                </ul>
+            </div>
+        );
+    }
+});
+ReactDOM.render(
+    <App profileData={DATA}/>,
+    document.querySelector("#app")
+);
