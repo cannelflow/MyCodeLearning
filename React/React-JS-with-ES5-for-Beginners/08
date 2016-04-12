@@ -1,0 +1,77 @@
+//html file
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>React For EveryOne Tutorial</title>
+    <link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="app" class="container well"></div>
+<script src="demo.js" type="text/babel"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js"></script>
+</body>
+</html>
+//js file
+var Note = React.createClass({
+    getInitialState:function(){
+        return{
+            editing:false,
+            text:""
+        }
+    },
+    edit:function(){
+        this.setState({editing:true});
+    },
+    trash:function(){
+        alert("You Are About To Delete");
+        this.setState({editing:false});
+        this.setState({text:""});
+    },
+    save:function(){
+        this.setState({editing:false});
+        this.setState({text: this.state.text});
+    },
+    handleTextChange:function(e){
+        e.preventDefault();
+        this.setState({editing:true});
+        this.setState({text:e.target.value});
+    },
+    renderForm:function(){
+        return(
+           <div>
+               <textarea value={this.state.text} defaultValue={this.props.children}
+                         onChange={this.handleTextChange} className="form-control" ></textarea>
+               <button onClick={this.save} className="btn btn-success btn-sm glyphicon glyphicon-floppy-disk" />
+           </div>
+        );
+    },
+    renderDisplay:function(){
+      return(
+          <div>
+              <h1>Hello React</h1>
+              <p>{this.state.text}</p>
+              <button className="btn btn-primary glyphicon glyphicon-pencil" onClick={this.edit}></button>
+              <button className="btn btn-danger glyphicon glyphicon-trash" onClick={this.trash}></button>
+          </div>
+      );
+    },
+    render:function(){
+        if(this.state.editing){
+            return (this.renderForm());
+        }else{
+            return (this.renderDisplay());
+        }
+    }
+});
+ReactDOM.render(
+    <Note>This Is From Text Area</Note>,
+    document.querySelector("#app")
+);
