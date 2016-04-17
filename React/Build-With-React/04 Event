@@ -1,0 +1,44 @@
+//html file
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>React JS</title>
+</head>
+<body>
+<div id="app"></div>
+<script src="demo.js" type="text/babel"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.1/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.1/react-dom.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js"></script>
+</body>
+</html>
+//js file
+var ChildComponent = React.createClass({
+    render:function(){
+        return(
+            <div>
+            <p>Add a click handler to this button so that when clicked, performMagic is called in the parent component.</p>
+            <button onClick={this.props.click}>Do Magic</button>
+            </div>
+        );
+    }
+});
+var ParentComponent = React.createClass({
+    alert:function(){
+        alert("Hello World !!!");
+    },
+    render:function(){
+        return(
+            <div>
+                <ChildComponent click={this.alert}/>
+            </div>
+        );
+    }
+});
+ReactDOM.render(
+    <ParentComponent/>,
+    document.querySelector("#app")
+);
