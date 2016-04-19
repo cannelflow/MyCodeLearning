@@ -1,0 +1,49 @@
+//html file
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>React JS</title>
+    <link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="app"></div>
+<script src="demo.js" type="text/babel"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.1/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.1/react-dom.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js"></script>
+</body>
+</html>
+//js file
+var books=["All the Light We Cannot See ","The Nightingale ","The Girl on the Train "];
+var Quiz = React.createClass({
+    render:function(){
+        return(
+            <div>
+                {this.props.data.map(function(title){
+                    return(
+                        <Books key={title} title={title}/>
+                    );
+                })}
+            </div>
+        );
+    }
+});
+var Books = React.createClass({
+    render:function(){
+        return(
+            <div>
+                <p>{this.props.title}</p>
+            </div>
+        );
+    }
+});
+ReactDOM.render(
+    <Quiz data={books}/>,
+    document.querySelector("#app")
+);
