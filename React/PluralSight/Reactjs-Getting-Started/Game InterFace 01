@@ -1,0 +1,97 @@
+//html file
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>React JS</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="demo.css">
+</head>
+<body>
+<div class="container">
+    <div id="app"></div>
+</div>
+<script src="demo.js" type="text/babel"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.1/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.1/react-dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js"></script>
+</body>
+</html>
+//js file
+var Game = React.createClass({
+   render:function(){
+       return(
+           <div id="game">
+               <h1 className="text-primary text-center">Play Nine</h1>
+               <hr/>
+               <div className="clearfix">
+                   <Star />
+                   <Button />
+                   <Answer  />
+               </div>
+               <hr/>
+           </div>
+       );
+   }
+});
+var Star = React.createClass({
+    render:function(){
+        return(
+            <div id="star">
+                <div  className="well">
+                    <span className="glyphicon glyphicon-star"></span>
+                    <span className="glyphicon glyphicon-star"></span>
+                    <span className="glyphicon glyphicon-star"></span>
+                    <span className="glyphicon glyphicon-star"></span>
+                </div>
+            </div>
+        );
+    }
+});
+var Button = React.createClass({
+    render:function(){
+        return(
+            <div id="button">
+                <button className="btn btn-primary btn-lg">=</button>
+            </div>
+        );
+    }
+});
+var Answer = React.createClass({
+    render:function(){
+        return(
+            <div id="answer">
+                <div className="well">
+                    ---
+                </div>
+            </div>
+        );
+    }
+});
+ReactDOM.render(
+    <Game/>,
+    document.querySelector("#app")
+);
+//css file
+#star .glyphicon-star{
+    margin:0.3em;
+    font-size: 1.75em;
+}
+#star,#answer{
+    width: 40%;
+    float: left;
+}
+#button{
+    width: 20%;
+    float: left;
+    text-align: center;
+    margin-top: 50px;
+}
+#star .well , #answer .well{
+    height:150px;
+}
