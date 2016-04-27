@@ -5,6 +5,6 @@
 <li>npm i -S react react-dom</li>
 <li>npm i -D babel-core babel-loader babel-preset-es2015 babel-preset-react react-ho
 t-loader webpack webpack-dev-server</li>
-<li></li>
-<li></li>
+<li>npm i -g webpack webpack-dev-server</li>
+<li>touch webpack.config.js</li>
 </ul>
