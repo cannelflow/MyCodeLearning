@@ -1,0 +1,42 @@
+//html file
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <title>React Tutorial</title>
+</head>
+<body>
+<div id="app"></div>
+<script src="bundle.js"></script>
+</body>
+</html>
+//index.js file
+var React = require('react');
+var ReactDOM = require('react-dom');
+var App = require('component/app');
+ReactDOM.render(
+    <App/>,
+    document.querySelector('#app')
+);
+//app.js file
+var React = require('react');
+var App = React.createClass({
+    getInitialState:function(){
+        return{click:0}
+    },
+    click:function(){
+        this.setState({click:this.state.click+1});
+    },
+    render: function() {
+       return(
+               <div className="well">
+                   <h1>{this.state.click}</h1>
+                   <button onClick={this.click}>+1</button>
+               </div>
+       );
+    }
+});
+module.exports = App;
