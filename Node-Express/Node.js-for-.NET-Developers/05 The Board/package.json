@@ -1,0 +1,10 @@
+{
+  "name": "05-The-Board",
+  "version": "0.0.0",
+  "description": "05 Message Board",
+  "main": "server.js",
+  "author": {
+    "name": "cannelflow",
+    "email": ""
+  }
+}

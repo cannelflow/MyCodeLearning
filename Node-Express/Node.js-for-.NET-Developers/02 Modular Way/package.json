@@ -1,0 +1,10 @@
+{
+  "name": "02-Modular-Way",
+  "version": "0.0.0",
+  "description": "02 Modular Way",
+  "main": "app.js",
+  "author": {
+    "name": "cannelflow",
+    "email": ""
+  }
+}
