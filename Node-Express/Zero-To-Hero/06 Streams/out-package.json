@@ -1,0 +1,10 @@
+{
+  "name": "06-Streams",
+  "version": "0.0.0",
+  "description": "06 Streams",
+  "main": "app.js",
+  "author": {
+    "name": "cannelflow",
+    "email": ""
+  }
+}

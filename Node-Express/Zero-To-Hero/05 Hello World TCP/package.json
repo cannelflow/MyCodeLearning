@@ -1,0 +1,10 @@
+{
+  "name": "05-Hello-World-TCP",
+  "version": "0.0.0",
+  "description": "05 Hello World TCP",
+  "main": "app.js",
+  "author": {
+    "name": "cannelflow",
+    "email": ""
+  }
+}

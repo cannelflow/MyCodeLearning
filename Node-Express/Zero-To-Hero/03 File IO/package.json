@@ -1,0 +1,10 @@
+{
+  "name": "03-File-IO",
+  "version": "0.0.0",
+  "description": "03 File IO",
+  "main": "app.js",
+  "author": {
+    "name": "cannelflow",
+    "email": ""
+  }
+}
