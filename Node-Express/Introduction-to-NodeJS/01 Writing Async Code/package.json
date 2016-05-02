@@ -1,0 +1,10 @@
+{
+  "name": "01-Writing-Async-Code",
+  "version": "0.0.0",
+  "description": "01 Writing Async Code",
+  "main": "app.js",
+  "author": {
+    "name": "rprupesh",
+    "email": ""
+  }
+}

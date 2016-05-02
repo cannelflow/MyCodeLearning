@@ -3,14 +3,14 @@
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
-    <Name>01 Hello World</Name>
-    <RootNamespace>01 Hello World</RootNamespace>
+    <Name>01 Writing Async Code</Name>
+    <RootNamespace>01 Writing Async Code</RootNamespace>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>5a1a0215-22a8-48fe-b92d-87f9cd8ebb42</ProjectGuid>
+    <ProjectGuid>c9b7f2fe-bd0a-4acf-8e42-700849535e11</ProjectGuid>
     <ProjectHome>.</ProjectHome>
     <StartupFile>app.js</StartupFile>
     <StartWebBrowser>False</StartWebBrowser>
