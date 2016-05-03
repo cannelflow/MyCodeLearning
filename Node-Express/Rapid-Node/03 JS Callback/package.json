@@ -1,0 +1,10 @@
+{
+  "name": "03-JS-Callback",
+  "version": "0.0.0",
+  "description": "03 JS Callback",
+  "main": "app.js",
+  "author": {
+    "name": "cannelflow",
+    "email": ""
+  }
+}

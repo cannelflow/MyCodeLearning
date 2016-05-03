@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "03 JS Callback", "03 JS Callback.njsproj", "{33B1C9F1-0546-4697-8905-8CFD826A6CAC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{33B1C9F1-0546-4697-8905-8CFD826A6CAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33B1C9F1-0546-4697-8905-8CFD826A6CAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33B1C9F1-0546-4697-8905-8CFD826A6CAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33B1C9F1-0546-4697-8905-8CFD826A6CAC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

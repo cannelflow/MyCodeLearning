@@ -1,0 +1,13 @@
+{
+  "name": "07-Using-3rd-Party-Module",
+  "version": "0.0.0",
+  "description": "07 Using 3rd Party Module",
+  "main": "app.js",
+  "author": {
+    "name": "cannelflow",
+    "email": ""
+  },
+  "dependencies": {
+    "moment": "^2.13.0"
+  }
+}

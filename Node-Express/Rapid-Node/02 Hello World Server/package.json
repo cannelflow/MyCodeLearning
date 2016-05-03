@@ -1,0 +1,10 @@
+{
+  "name": "02-Hello-World-Server",
+  "version": "0.0.0",
+  "description": "02 Hello World Server",
+  "main": "app.js",
+  "author": {
+    "name": "cannelflow",
+    "email": ""
+  }
+}

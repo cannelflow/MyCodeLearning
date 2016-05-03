@@ -1,0 +1,10 @@
+{
+  "name": "08-Using-Local-Module",
+  "version": "0.0.0",
+  "description": "08 Using Local Module",
+  "main": "app.js",
+  "author": {
+    "name": "cannelflow",
+    "email": ""
+  }
+}

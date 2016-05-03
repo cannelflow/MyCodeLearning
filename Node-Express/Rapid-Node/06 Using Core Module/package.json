@@ -1,0 +1,10 @@
+{
+  "name": "06-Using-Core-Module",
+  "version": "0.0.0",
+  "description": "06 Using Core Module",
+  "main": "app.js",
+  "author": {
+    "name": "rprupesh",
+    "email": ""
+  }
+}

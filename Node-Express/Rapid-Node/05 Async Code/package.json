@@ -1,0 +1,10 @@
+{
+  "name": "05-Async-Code",
+  "version": "0.0.0",
+  "description": "05 Async Code",
+  "main": "app.js",
+  "author": {
+    "name": "rprupesh",
+    "email": ""
+  }
+}
