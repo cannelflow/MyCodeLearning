@@ -1,4 +1,3 @@
-﻿var index = function (a) { 
+﻿module.exports = function (a) { 
     return ("Hello " + a);
 }
-module.exports = index;

@@ -1,0 +1,8 @@
+﻿<html>
+<head>
+<title>@model.title</title>
+</head>
+<body>
+<div>@html.block("body")</div>
+</body>
+</html>

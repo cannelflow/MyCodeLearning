@@ -1,0 +1,6 @@
+﻿@html.extend("layout",function(model){
+ @html.block("body",function(model){
+   <h1>@model.title</h1>
+   <p>this is from the server</p>
+ })
+})

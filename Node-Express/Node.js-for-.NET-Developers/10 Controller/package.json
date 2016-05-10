@@ -1,13 +1,14 @@
 {
-  "name": "06-Introducing-Express",
+  "name": "06-Controller",
   "version": "0.0.0",
-  "description": "06 Introducing Express",
+  "description": "06 Controller",
   "main": "server.js",
   "author": {
     "name": "cannelflow",
     "email": ""
   },
   "dependencies": {
-    "express": "^4.13.4"
+    "express": "^4.13.4",
+    "vash": "^0.11.3"
   }
 }

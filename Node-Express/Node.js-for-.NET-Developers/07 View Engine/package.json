@@ -1,13 +1,14 @@
 {
-  "name": "06-Introducing-Express",
+  "name": "03-View-Engine",
   "version": "0.0.0",
-  "description": "06 Introducing Express",
+  "description": "03 View Engine",
   "main": "server.js",
   "author": {
     "name": "cannelflow",
     "email": ""
   },
   "dependencies": {
-    "express": "^4.13.4"
+    "express": "^4.13.4",
+    "jade": "^1.11.0"
   }
 }

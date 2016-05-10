@@ -1,0 +1,10 @@
+{
+  "name": "02-Moduler-Way",
+  "version": "0.0.0",
+  "description": "02 Moduler Way",
+  "main": "app.js",
+  "author": {
+    "name": "rprupesh",
+    "email": ""
+  }
+}
