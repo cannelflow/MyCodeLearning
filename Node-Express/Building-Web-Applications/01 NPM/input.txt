@@ -1,0 +1,4 @@
+Node.js is a simple and powerful tool for
+backend JavaScript development. In this session,
+I will show you everything you need to know to get started
+in web development with Node.js.
