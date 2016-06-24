@@ -1,0 +1,15 @@
+*{
+    border: 1px solid grey;
+}
+ul li a {
+    color: red;
+}
+h4+ul{
+    border: 2px solid blue;
+}
+a[href="https://www.google.co.in/"]{
+    color: blue;
+}
+ul:nth-of-type(3){
+    background: purple;
+}

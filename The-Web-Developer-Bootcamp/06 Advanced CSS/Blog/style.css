@@ -1,0 +1,30 @@
+body{
+    font-family: 'Raleway', sans-serif;
+}
+.container{
+    border: 20px solid #bdc3c7;
+    max-width: 850px;
+    width: 80%;
+    margin: auto;
+    padding:10px;
+}
+.date{
+    color:#3498db;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+}
+h2{
+    font-size: 40px;
+    font-weight: bold;
+}
+p{
+    font-weight: 400;
+}
+.verticalLine {
+    border-left: thick solid #ff0000;
+    padding-left: 5px;
+}
+hr{
+    1px solid #bdc3c7;
+    margin: 10px 0;
+}
