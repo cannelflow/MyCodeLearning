@@ -1,0 +1,28 @@
+<!-- views/pages/about.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../partials/head %>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-primary">My Friend List Goes Here</h1>
+        <% for(var i = 0;i < friends.length; i++) {%>
+            <li>
+                <%= friends[i] %>
+            </li>
+        <% } %>
+        <form action="/addfriend" method="POST">
+            <input type="text" placeholder="name" name="name">
+            <button>Submit</button>
+        </form>
+        <footer>
+            <% include ../partials/footer %>
+        </footer>
+    </div>
+</body>
+
+</html>

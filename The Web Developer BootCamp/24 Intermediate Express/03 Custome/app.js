@@ -1,17 +1,23 @@
 /* jshint node: true */
 var express = require('express');
 var app = express();
+
 //======================
 //serve from public dir
 //======================
+
 app.use(express.static("public"));
+
 //======================
 //set view engine
 //======================
+
 app.set("view engine","ejs");
+
 //======================
 //        Routes
 //======================
+
 app.get('/', function (req, res) {
     res.render('home');
 });
@@ -26,9 +32,11 @@ app.get('/post', function (req, res) {
               {title:"Post 4",author:"Author 4"}];
     res.render('post',{posts:post});
 });
+
 //======================
 //        Server
 //======================
+
 app.listen(3000, function () {
     console.log('Example app listening on port 3000!');
 });

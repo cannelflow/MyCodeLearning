@@ -1,0 +1,24 @@
+<!-- views/pages/index.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../partials/head %>
+</head>
+
+<body>
+
+    <div class="container text-center search-box">
+       <h1 class="text-primary">Search For OMDB Database</h1>
+       <form action="/result" method="get">
+            <input type="text" placeholder="Search For" name="name">
+            <button>Submit</button>
+        </form>
+        <footer>
+            <% include ../partials/footer %>
+        </footer>
+    </div>
+</body>
+
+</html>

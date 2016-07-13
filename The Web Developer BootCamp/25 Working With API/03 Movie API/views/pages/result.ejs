@@ -1,0 +1,27 @@
+<!-- views/pages/result.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../partials/head %>
+</head>
+
+<body>
+    <div class="container text-center">
+        <h1 class="text-primary">Search Result</h1>
+        <% for (var i = 0;i < (data.Search).length;i++) { %>
+        <div class="main-box">
+                <h2>Title: <%= data.Search[i].Title %></h2>
+                <p>Year: <%= data.Search[i].Year %></p>
+                <p>imdb ID: <%= data.Search[i].imdbID %></p>
+                <p>Type: <%= data.Search[i].Type %></p>
+        </div>
+        <% } %>
+        <footer>
+            <% include ../partials/footer %>
+        </footer>
+    </div>
+</body>
+
+</html>
