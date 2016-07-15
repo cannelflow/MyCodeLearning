@@ -1,0 +1,13 @@
+<!-- views/pages/campground.ejs -->
+
+<% include ../partials/header %>
+
+    <h1>This Is Campground</h1>
+    <a href="/campground/new" target="_blank">Add New CampGround</a>
+    <% for (var i = 0;i < data.length;i++) {%>
+        <h4><%= data[i].name %></h4>
+        <img src="<%= data[i].image %>" alt="">
+        <% } %>
+
+
+<% include ../partials/footer %>

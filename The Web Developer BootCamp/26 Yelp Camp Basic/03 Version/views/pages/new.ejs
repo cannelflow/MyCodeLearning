@@ -1,0 +1,11 @@
+<!-- views/pages/NEW.ejs -->
+
+<% include ../partials/header %>
+<h1>Create A New Campground</h1>
+    <form action="/campground" method="POST">
+        <input type="text" placeholder="campground" name="name">
+        <input type="text" placeholder="value" name="image">
+        <button>Submit</button>
+    </form>
+<a href="/campground">Go Back </a>
+    <% include ../partials/footer %>

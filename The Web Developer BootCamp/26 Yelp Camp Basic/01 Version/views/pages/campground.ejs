@@ -1,0 +1,23 @@
+<!-- views/pages/result.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../partials/head %>
+</head>
+
+<body>
+        <h1>This Is Campground</h1>
+           
+            <% for (var i = 0;i < data.length;i++) {%>
+                <h4><%= data[i].name %></h4>
+                <img src="<%= data[i].image %>" alt="">
+                <% } %>
+
+        <footer>
+            <% include ../partials/footer %>
+        </footer>
+</body>
+
+</html>
