@@ -1,0 +1,21 @@
+html { 
+  background: url(img/pink-sky.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+body{
+    background: none;
+}
+.container{
+    margin-top: 100px;
+    width: 600px;
+}
+input{
+    margin: 20px;
+}
+.result{
+    margin: 20px;
+    width: 100%;
+}
